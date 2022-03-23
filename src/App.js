@@ -4,54 +4,46 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Routes
+  Routes,
+  useParams
 } from "react-router-dom";
 
 export default function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
+        <h2>Accounts</h2>
+
+        <ul>
+          <li>
+            <Link to="/netflix">Netflix</Link>
+          </li>
+          <li>
+            <Link to="/zillow-group">Zillow Group</Link>
+          </li>
+          <li>
+            <Link to="/yahoo">Yahoo</Link>
+          </li>
+          <li>
+            <Link to="/modus-create">Modus Create</Link>
+          </li>
+        </ul>
+
         <Routes>
-          <Route path='/about' element={<About />} />
-          <Route path='/users' element={<Users />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/:id" element={<Child />} />
         </Routes>
       </div>
     </Router>
+
   );
 }
 
-function Home() {
- return (
-   <div>
-     <h2>Home</h2>
-   </div>
- );
-}
-function About() {
+function Child() {
+  let { id } = useParams();
+
   return (
     <div>
-      <h2>About</h2>
-    </div>
-  );
-}
-function Users() {
-  return (
-    <div>
-      <h2>Users</h2>
+      <h3>ID: {id}</h3>
     </div>
   );
 }
