@@ -1,49 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Routes,
-  useParams
-} from "react-router-dom";
+import { Route,Routes } from "react-router-dom";
+import Layout from './Layout';
+import About from './pages/About';
+import Article from './pages/Article';
+import Articles from './pages/Articles';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import MyPage from './pages/MyPage';
+import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
+
+
 
 export default function App() {
   return (
-    <Router>
-      <div>
-        <h2>Accounts</h2>
-
-        <ul>
-          <li>
-            <Link to="/netflix">Netflix</Link>
-          </li>
-          <li>
-            <Link to="/zillow-group">Zillow Group</Link>
-          </li>
-          <li>
-            <Link to="/yahoo">Yahoo</Link>
-          </li>
-          <li>
-            <Link to="/modus-create">Modus Create</Link>
-          </li>
-        </ul>
-
-        <Routes>
-          <Route path="/:id" element={<Child />} />
-        </Routes>
-      </div>
-    </Router>
-
-  );
-}
-
-function Child() {
-  let { id } = useParams();
-
-  return (
-    <div>
-      <h3>ID: {id}</h3>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element= {<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path ="/profiles/:username" element={<Profile />} />
+      </Route>
+      <Route path="/articles"element={<Articles />}>
+        <Route path=":id" element={<Article />} />
+      </Route> 
+      <Route path="/login" element={<Login />} />
+      <Route path="/mypage" element={<MyPage />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
